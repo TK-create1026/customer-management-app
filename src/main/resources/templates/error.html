@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>エラー</title>
+        <style>
+            body{
+                font-family: sans-serif;
+            }
+            .error{
+                color: red;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>エラー</h1>
+        <p th:tx="${message}"></p>
+        <br>
+        <a href="/">ホームへ戻る</a>
+    </body>
+</html>
