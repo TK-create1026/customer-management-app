@@ -21,12 +21,18 @@
         <tr>
             <th>ID</th>
             <th>名前</th>
+            <th>性別</th>
+            <th>生年月日</th>
+            <th>年齢</th>
             <th>メールアドレス</th>
             <th>操作</th>
         </tr>
         <tr th:each="customer : ${customers}">
             <td th:text="${customer.id}"></td>
             <td th:text="${customer.name}"></td>
+            <td th:text="${customer.gender}"></td>
+            <td th:text="${customer.birthday}"></td>
+            <td th:text="${customer.age}"></td>
             <td th:text="${customer.email}"></td>
 
             <td>

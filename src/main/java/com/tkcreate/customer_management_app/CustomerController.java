@@ -25,7 +25,17 @@ public class CustomerController {
 
     //顧客情報登録処理
     @PostMapping("/add")
-    public String addCustomer(Customer customer){
+    public String addCustomer(Customer customer,Model model){
+
+        if(!customer.isValidCustomer()){
+            model.addAttribute("message","すべての項目を入力してください。");
+            return "add";
+        }
+
+        if(!customer.isValidBirthday()){
+            model.addAttribute("message","生年月日は0歳以上120歳以下になる日付を入力してください。");
+            return "add";
+        }
         customerRepository.save(customer);
         return "complete";
     }
@@ -63,8 +73,20 @@ public class CustomerController {
     }
 
     @PostMapping ("/update")
-    public String updateCustomer(Customer customer){
+    public String updateCustomer(Customer customer,Model model){
+
+        if(!customer.isValidCustomer()){
+            model.addAttribute("message","すべての項目を入力してください。");
+            return "update";
+        }
+
+        if(!customer.isValidBirthday()){
+            model.addAttribute("message","生年月日は0歳以上120歳以下になる日付を入力してください。");
+            return "update";
+        }
         customerRepository.save(customer);
         return "redirect:/list";
     }
+
+    
 }
