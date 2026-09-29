@@ -41,12 +41,13 @@
             <td th:text="${customer.email}"></td>
 
             <td>
-                <a th:href="@{/update/{id}(id=${customer.id})}">[更新]</a>
-                <a th:href="@{/delete/{id}(id=${customer.id})}" onclick="return confirm('本当に削除しますか？');">[削除]</a>
+                <a th:href="@{/customer/update/{id}(id=${customer.id})}">[更新]</a>
+                <a th:href="@{/customer/password/{id}(id=${customer.id})}">[パスワード変更]</a>
+                <a th:href="@{/customer/delete/{id}(id=${customer.id})}" onclick="return confirm('本当に削除しますか？');">[削除]</a>
             </td>
         </tr>
     </table>
     <br>
-    <a href="/">ホームに戻る</a>
+    <a href="/customer">ホームに戻る</a>
 </body>
 </html>

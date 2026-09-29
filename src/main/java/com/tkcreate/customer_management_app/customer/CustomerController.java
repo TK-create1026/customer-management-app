@@ -1,4 +1,4 @@
-package com.tkcreate.customer_management_app;
+package com.tkcreate.customer_management_app.customer;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,86 +17,119 @@ public class CustomerController {
     }
 
     // 顧客情報追加画面表示
-    @GetMapping("/add")
+    @GetMapping("/customer/add")
     public String showaddForm(Model model){
         model.addAttribute("customer", new Customer());
-        return "add";
+        return "customer/add";
     }
 
     // 顧客情報登録処理
-    @PostMapping("/add")
+    @PostMapping("/customer/add")
     public String addCustomer(Customer customer,Model model){
 
         // 入力判定
-        if(!customer.isValidCustomer()){
+        if(!customer.isValidCustomer() ||(customer.getPassword() == null) || (customer.getPassword().isBlank())){
+
             model.addAttribute("message","すべての項目を入力してください。");
-            return "add";
+            return "customer/add";
         }
 
         // 生年月日有効判定
         if(!customer.isValidBirthday()){
             model.addAttribute("message","生年月日は0歳以上120歳以下になる日付を入力してください。");
-            return "add";
+            return "customer/add";
         }
         customerRepository.save(customer);
-        return "complete";
+        return "customer/complete";
     }
 
-    @GetMapping("/list")
+    @GetMapping("/customer/list")
     public String listCustomers(Model model){
         List<Customer> customers = customerRepository.findAll();
 
         model.addAttribute("customers",customers);
 
-        return "customer-list";
+        return "customer/customer-list";
     }
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/customer/delete/{id}")
     public String deletecustomer(@PathVariable Long id,Model model){
         if(!customerRepository.existsById(id)){
             model.addAttribute("message","指定した顧客が存在しません。");
-            return "error";
+            return "customer/error";
         }
         customerRepository.deleteById(id);
-        return "redirect:/list";
+        return "redirect:/customer/list";
     }
     
-    @GetMapping("/update/{id}")
+    @GetMapping("/customer/update/{id}")
     public String showupdateForm(@PathVariable Long id,Model model){
         Customer customer = customerRepository.findById(id).orElse(null);
         
         if(customer == null){
             model.addAttribute("message","指定した顧客が存在しません。");
-            return "error";
+            return "customer/error";
         }
 
         model.addAttribute("customer",customer);
-        return "update";
+        return "customer/update";
     }
 
-    @PostMapping ("/update")
+    @PostMapping ("/customer/update")
     public String updateCustomer(Customer customer,Model model){
 
         if(!customer.isValidCustomer()){
             model.addAttribute("message","すべての項目を入力してください。");
-            return "update";
+            return "customer/update";
         }
 
         if(!customer.isValidBirthday()){
             model.addAttribute("message","生年月日は0歳以上120歳以下になる日付を入力してください。");
-            return "update";
+            return "customer/update";
         }
         customerRepository.save(customer);
-        return "redirect:/list";
+        return "redirect:/customer/list";
+    }
+
+    @GetMapping("/customer/password/{id}")
+    public String showPasswordupdateForm(@PathVariable Long id,Model model){
+        Customer customer = customerRepository.findById(id).orElse(null);
+
+        if(customer == null){
+            model.addAttribute("message","指定した顧客が存在しません。");
+            return "customer/error";
+        }
+
+        model.addAttribute("customer",customer);
+        return "customer/password-update";
+    }
+
+    @PostMapping("/customer/password")
+    public String updatePassword(Customer customer,Model model){
+        Customer target = customerRepository.findById(customer.getId()).orElse(null);
+
+        if(target == null){
+            model.addAttribute("message","指定した顧客が存在しません。");
+            return "customer/error";
+        }
+
+        if(customer.getPassword() == null || customer.getPassword().isBlank()){
+            model.addAttribute("message","パスワードを入力してください。");
+            return "customer/password-update";
+        }
+
+        target.setPassword(customer.getPassword());
+        customerRepository.save(target);
+        return "customer/password-complete";
     }
 
     // 検索画面表示
-    @GetMapping("/search")
+    @GetMapping("/customer/search")
     public String showsearchForm(){
-        return "search";
+        return "customer/search";
     }
 
-    @GetMapping("search/result")
+    @GetMapping("/customer/search/result")
     public String searchCustomer(String name,String gender,Model model){
 
         boolean noName = (name == null || name.isBlank());
@@ -104,7 +137,7 @@ public class CustomerController {
 
         if(noName && noGender){
             model.addAttribute("message","名前または性別を入力してください。");
-            return "search";
+            return "customer/search";
         }
 
         List<Customer> customers;
@@ -123,6 +156,6 @@ public class CustomerController {
         }
         model.addAttribute("customers",customers);
 
-        return "customer-list";
+        return "customer/customer-list";
     }
 }

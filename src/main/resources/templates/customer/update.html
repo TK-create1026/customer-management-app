@@ -10,7 +10,7 @@
             th:text="${message}"
             style="color: red;">
             </p>
-            <form th:action="@{/update}"
+            <form th:action="@{/customer/update}"
                 th:object="${customer}"
                 method="post">
                 <input type="hidden" th:field="*{id}">
@@ -32,9 +32,9 @@
                 <input type="text" th:field="*{email}">
                 <br><br>
                 <button type="submit">更新</button>
-                <button type="button" onclick="location.href='/'">キャンセル</button>
+                <button type="button" onclick="location.href='/customer'">キャンセル</button>
             </form>
             <br>
-            <a href="/">ホームへ戻る</a>
+            <a href="/customer">ホームへ戻る</a>
         </body>
 </html>

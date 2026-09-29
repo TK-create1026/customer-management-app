@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://ww.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
         <title>顧客情報追加</title>
@@ -10,7 +10,7 @@
         th:text="${message}"
         style="color: red;">
         </p>
-        <form th:action="@{/add}" th:object="${customer}" method="post">
+        <form th:action="@{/customer/add}" th:object="${customer}" method="post">
             <p>名前</p>
             <input type="text" th:field="*{name}">
 
@@ -28,9 +28,12 @@
             <p>メールアドレス</p>
             <input type="email" th:field="*{email}">
 
+            <p>パスワード</p>
+            <input type="password" th:field="*{password}">
+
             <br><br>
             <button type="submit">登録</button>
-            <button type="button" onclick="location.href='/'">キャンセル</button>
+            <button type="button" onclick="location.href='/customer'">キャンセル</button>
         </form>
     </body>
 </html>

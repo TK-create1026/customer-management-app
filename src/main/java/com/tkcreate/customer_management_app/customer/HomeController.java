@@ -1,12 +1,12 @@
-package com.tkcreate.customer_management_app;
+package com.tkcreate.customer_management_app.customer;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.stereotype.Controller;
 
 @Controller
 public class HomeController {
-    @GetMapping("/")
+    @GetMapping("/customer")
     public String home(){
-        return "index";
+        return "customer/index";
     }
 }

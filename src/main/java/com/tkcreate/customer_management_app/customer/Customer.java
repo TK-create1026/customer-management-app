@@ -1,4 +1,4 @@
-package com.tkcreate.customer_management_app;
+package com.tkcreate.customer_management_app.customer;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -20,6 +20,7 @@ public class Customer {
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private LocalDate birthday;
     private String email;
+    private String password;
     public Long getId(){
         return id;
     }
@@ -88,11 +89,19 @@ public class Customer {
         this.email = email;
     }
 
-    public boolean isValEmail(){
+    public boolean isValidEmail(){
         if(email == null || email.isBlank()){
             return false;
         }
         return email.contains("@");
+    }
+
+    public String getPassword(){
+        return password;
+    }
+
+    public void setPassword(String password){
+        this.password = password;
     }
 
     public boolean isValidCustomer(){
@@ -111,6 +120,7 @@ public class Customer {
         if(email == null || email.isBlank()){
             return false;
         }
+
         return true;
     }
 }

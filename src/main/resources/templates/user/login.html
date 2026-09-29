@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>ログイン</title>
+    </head>
+    <body>
+        <h1>ログイン</h1>
+        <p th:if="${message}"
+        th:text="${message}"
+        style="color:red;">
+        </p>
+        <form th:action="@{/user/login}"
+        method="post">
+            <p>メールアドレス</p>
+            <input type="email"
+                   name="email">
+
+            <p>パスワード</p>
+            <input type="password"
+                   name="password">
+            <br><br>
+            <button type="submit">
+                ログイン
+            </button>
+        </form>
+
+        <br>
+        <a href="/user/register">
+            新規登録はこちら
+        </a>
+    </body>
+</html>
