@@ -7,6 +7,11 @@
 <body>
     <h1>顧客一覧</h1>
 
+    <p th:if="${message}"
+    th:text="${message}"
+    style="color:red;">
+    </p>
+
     <style>
         table{
             border-collapse: collapse;

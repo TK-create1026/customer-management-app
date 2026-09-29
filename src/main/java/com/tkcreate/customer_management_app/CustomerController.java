@@ -16,22 +16,24 @@ public class CustomerController {
         this.customerRepository = customerRepository;
     }
 
-    //顧客情報追加画面表示
+    // 顧客情報追加画面表示
     @GetMapping("/add")
     public String showaddForm(Model model){
         model.addAttribute("customer", new Customer());
         return "add";
     }
 
-    //顧客情報登録処理
+    // 顧客情報登録処理
     @PostMapping("/add")
     public String addCustomer(Customer customer,Model model){
 
+        // 入力判定
         if(!customer.isValidCustomer()){
             model.addAttribute("message","すべての項目を入力してください。");
             return "add";
         }
 
+        // 生年月日有効判定
         if(!customer.isValidBirthday()){
             model.addAttribute("message","生年月日は0歳以上120歳以下になる日付を入力してください。");
             return "add";
@@ -88,5 +90,39 @@ public class CustomerController {
         return "redirect:/list";
     }
 
-    
+    // 検索画面表示
+    @GetMapping("/search")
+    public String showsearchForm(){
+        return "search";
+    }
+
+    @GetMapping("search/result")
+    public String searchCustomer(String name,String gender,Model model){
+
+        boolean noName = (name == null || name.isBlank());
+        boolean noGender = (gender == null || gender.isBlank());
+
+        if(noName && noGender){
+            model.addAttribute("message","名前または性別を入力してください。");
+            return "search";
+        }
+
+        List<Customer> customers;
+
+        if(!noName && !noGender){
+            customers =customerRepository.findByNameContainingAndGender(name,gender);
+        }
+        else if(!noName){
+            customers = customerRepository.findByNameContaining(name);
+        }
+        else{
+            customers = customerRepository.findByGender(gender);
+        }
+        if(customers.isEmpty()){
+            model.addAttribute("message","該当する顧客が見つかりませんでした");
+        }
+        model.addAttribute("customers",customers);
+
+        return "customer-list";
+    }
 }
