@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>メールアドレス変更</title>
+    </head>
+    <body>
+        <h1>メールアドレス変更</h1>
+        <p th:if="${message}"
+        th:text="${message}"
+        style="color:red;">
+        </p>
+        <form th:action="@{/user/mypage/lookup/email-update}"
+        th:object="${customer}"
+        method="post">
+        <p>新しいメールアドレス</p>
+        <input type="email"
+        th:field="*{email}">
+        <br><br>
+
+        <button type="submit">変更</button>
+    </form>
+    </body>
+</html>

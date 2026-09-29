@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>情報照会</title>
+    </head>
+    <body>
+        <h1>情報照会</h1>
+        <p>名前：<span th:text="${customer.name}"></span></p>
+        <p>性別：<span th:text="${customer.gender}"></span></p>
+        <p>生年月日：<span th:text="${customer.birthday}"></span></p>
+        <p>年齢：<span th:text="${customer.age}">歳</span></p>
+        <p>メールアドレス：<span th:text="${customer.email}"></span></p>
+        <br>
+        
+        <a href="/user/mypage/lookup/email-update">メールアドレス変更</a>
+        <br>
+        <a href="/user/mypage/lookup/password-update">パスワード変更</a>
+        <br><br>
+        <a href="/user/mypage">マイページへ戻る</a>
+    </body>
+</html>

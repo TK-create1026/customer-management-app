@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>マイページ</title>
+    </head>
+    <body>
+        <h1>マイページ</h1>
+        <p>ようこそ<span th:text="${customer.name}">さん</span>
+        </p>
+        <a href="/user/mypage/lookup">情報照会</a>
+        <br>
+        <a href="/user/mypage/unsubsc">退会手続き</a>
+        <br>
+        <a href="/user">ログアウト</a>
+    </body>
+</html>
