@@ -1,5 +1,6 @@
 package com.tkcreate.customer_management_app.customer;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,9 +12,11 @@ import org.springframework.ui.Model;
 @Controller
 public class CustomerController {
     private final CustomerRepository customerRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public CustomerController(CustomerRepository customerRepository){
+    public CustomerController(CustomerRepository customerRepository,PasswordEncoder passwordEncoder){
         this.customerRepository = customerRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     // 顧客情報追加画面表示
@@ -39,6 +42,8 @@ public class CustomerController {
             model.addAttribute("message","生年月日は0歳以上120歳以下になる日付を入力してください。");
             return "customer/add";
         }
+
+        customer.setPassword(passwordEncoder.encode(customer.getPassword()));
         customerRepository.save(customer);
         return "customer/complete";
     }
@@ -118,7 +123,7 @@ public class CustomerController {
             return "customer/password-update";
         }
 
-        target.setPassword(customer.getPassword());
+        target.setPassword(passwordEncoder.encode(customer.getPassword()));
         customerRepository.save(target);
         return "customer/password-complete";
     }
