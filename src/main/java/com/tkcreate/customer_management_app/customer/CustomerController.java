@@ -9,40 +9,43 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
+// 顧客情報の登録・更新・削除・検索を担当するContoroller
 @Controller
 public class CustomerController {
-    private final CustomerRepository customerRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final CustomerRepository customerRepository; //Repositoryを利用してDB操作を行う
+    private final PasswordEncoder passwordEncoder; // PasswordEncoderを利用してパスワードをハッシュ化する
 
     public CustomerController(CustomerRepository customerRepository,PasswordEncoder passwordEncoder){
         this.customerRepository = customerRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
-    // 顧客情報追加画面表示
+    // 顧客登録画面を表示する
     @GetMapping("/customer/add")
     public String showaddForm(Model model){
         model.addAttribute("customer", new Customer());
         return "customer/add";
     }
 
-    // 顧客情報登録処理
+    /* 顧客情報登録処理
+       入力チェックと生年月日チェックを行った後にDBへ保存する */
     @PostMapping("/customer/add")
     public String addCustomer(Customer customer,Model model){
 
-        // 入力判定
+        // 入力チェック
         if(!customer.isValidCustomer() ||(customer.getPassword() == null) || (customer.getPassword().isBlank())){
 
             model.addAttribute("message","すべての項目を入力してください。");
             return "customer/add";
         }
 
-        // 生年月日有効判定
+        // 生年月日チェック
         if(!customer.isValidBirthday()){
             model.addAttribute("message","生年月日は0歳以上120歳以下になる日付を入力してください。");
             return "customer/add";
         }
 
+        // パスワード漏洩時のリスクを軽減するためハッシュ化して保存
         customer.setPassword(passwordEncoder.encode(customer.getPassword()));
         customerRepository.save(customer);
         return "customer/complete";

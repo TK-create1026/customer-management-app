@@ -9,14 +9,23 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SecurityConfig{
+
+    // パスワードをBCryptでハッシュ化するための設定
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
+    // Spring Securityの設定
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http)throws Exception{
-        http.csrf(csrf -> csrf.disable()).authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
+
+        // 開発中のためCSRF対策を無効化
+        http.csrf(csrf -> csrf.disable())
+
+        // 全てのURLへアクセスを許可
+        .authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
+        
         return http.build();
     }
 }

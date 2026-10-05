@@ -9,18 +9,20 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-@Entity
+@Entity // Customerテーブルに対応するEntity
 public class Customer {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+
+    private Long id; // 顧客ID(主キー)新規登録時に自動採番される
     private String name;
     private String gender;
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private LocalDate birthday;
     private String email;
-    private String password;
+    private String password; // BCryptでハッシュ化されたパスワードを保持
+
     public Long getId(){
         return id;
     }
@@ -53,35 +55,33 @@ public class Customer {
         this.birthday = birthday;
     }
 
+    /*生年月日が有効か判断する
+      ・未来日付は入力不可
+      ・0歳以上120歳以下のみ許可 */
     public boolean isValidBirthday(){
         if(birthday == null){
             return false;
         }
 
         LocalDate today = LocalDate.now();
-
         if(birthday.isAfter(today)){
             return false;
         }
 
-        int age = Period.between(
-            birthday,
-            today)
-            .getYears();
+        int age = Period.between(birthday,today).getYears();
         
         return 0 <= age && age <= 120;
     }
+
+    // 生年月日から現在の年齢を計算する
     public int getAge(){
-    if(birthday == null){
-        return 0;
-    }
-    return Period.between(
-            birthday,
-            LocalDate.now())
-            .getYears();
+        if(birthday == null){
+            return 0;
+        }
+        return Period.between(birthday,LocalDate.now()).getYears();
     }
 
-        public String getEmail(){
+    public String getEmail(){
         return email;
     }
 
@@ -89,6 +89,8 @@ public class Customer {
         this.email = email;
     }
 
+    /* メールアドレスの簡易チェック
+       @が含まれているかを確認する*/
     public boolean isValidEmail(){
         if(email == null || email.isBlank()){
             return false;
@@ -104,6 +106,7 @@ public class Customer {
         this.password = password;
     }
 
+    // 必須項目がすべて入力されているか確認する。
     public boolean isValidCustomer(){
         if(name == null || name.isBlank()){
             return false;
