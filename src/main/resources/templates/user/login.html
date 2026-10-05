@@ -3,8 +3,10 @@
     <head>
         <meta charset="UTF-8">
         <title>ログイン</title>
+        <link rel="stylesheet" th:href="@{/css/style.css}">
     </head>
     <body>
+        <div claps="container">
         <h1>ログイン</h1>
         <p th:if="${message}"
         th:text="${message}"
@@ -26,8 +28,11 @@
         </form>
 
         <br>
+        <div class="link">
         <a href="/user/register">
             新規登録はこちら
         </a>
+        </div>
+        </div>
     </body>
 </html>

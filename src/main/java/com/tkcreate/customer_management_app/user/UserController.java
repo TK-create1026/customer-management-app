@@ -35,7 +35,7 @@ public class UserController{
         }
 
         if(!passwordEncoder.matches(password,customer.getPassword())){
-            model.addAttribute("message","メールアドレスまたわパスワードが違います。");
+            model.addAttribute("message","メールアドレスまたはパスワードが違います。");
             return "user/login";
         }
 
