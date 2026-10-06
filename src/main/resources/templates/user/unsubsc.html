@@ -3,14 +3,18 @@
     <head>
         <meta charset="UTF-8">
         <title>退会手続き</title>
+        <link rel="stylesheet" th:href="@{/css/style.css}">
     </head>
     <body>
+        <dive class="container">
         <h1>退会手続き</h1>
-        <p>本当に退会しますか？</p>
+        <p class="welcome">本当に退会しますか？</p>
         <form th:action="@{/user/mypage/unsubsc}"
         method="post">
             <button type="submit">退会する</button>
         </form>
+        <br>
         <button type="button" onclick="location.href='/user/mypage'">戻る</button>
+        </div>
     </body>
 </html>

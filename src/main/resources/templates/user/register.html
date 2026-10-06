@@ -3,13 +3,15 @@
     <head>
         <meta charset="UTF-8">
         <title>新規登録</title>
+        <link rel="stylesheet" th:href="@{/css/style.css}">
     </head>
     <body>
+        <div class="container">
         <h1>新規登録</h1>
 
         <p th:if="${message}"
         th:text="${message}"
-        style="color:red;">
+        class="error">
         </p>
 
         <form th:action="@{/user/register}"
@@ -37,7 +39,9 @@
             <input type="password" th:field="*{password}">
             <br><br>
             <button type="submit">登録</button>
+            <br><br>
             <button type="button" onclick="location.href='/user'">キャンセル</button>
         </form>
+        </div>
     </body>
 </html>

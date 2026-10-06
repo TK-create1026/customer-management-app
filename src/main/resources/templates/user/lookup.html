@@ -3,20 +3,47 @@
     <head>
         <meta charset="UTF-8">
         <title>情報照会</title>
+        <link rel="stylesheet" th:href="@{/css/style.css}">
     </head>
     <body>
+        <div class="container">
+
         <h1>情報照会</h1>
-        <p>名前：<span th:text="${customer.name}"></span></p>
-        <p>性別：<span th:text="${customer.gender}"></span></p>
-        <p>生年月日：<span th:text="${customer.birthday}"></span></p>
-        <p>年齢：<span th:text="${customer.age}">歳</span></p>
-        <p>メールアドレス：<span th:text="${customer.email}"></span></p>
+        <div class="info-item">
+            <strong>名前：</strong><span th:text="${customer.name}"></span>
+        </div>
+
+        <div class="info-item">
+            <strong>性別：</strong><span th:text="${customer.gender}"></span>
+        </div>
+        
+        <div class="info-item">
+            <strong>生年月日：</strong><span th:text="${customer.birthday}"></span>
+        </div>
+        
+        <div class="info-item">
+            <strong>年齢：</strong><span th:text="${customer.age}"></span>歳
+        </div>
+        
+        <div class="info-item">
+            <strong>メールアドレス：</strong><span th:text="${customer.email}"></span>
+        </div>
+        
         <br>
         
-        <a href="/user/mypage/lookup/email-update">メールアドレス変更</a>
-        <br>
-        <a href="/user/mypage/lookup/password-update">パスワード変更</a>
+        <div class="link">
+            <a href="/user/mypage/lookup/email-update">メールアドレス変更</a>
+        </div>
+
+        <div class="link">
+            <a href="/user/mypage/lookup/password-update">パスワード変更</a>
+        </div>
+        
         <br><br>
-        <a href="/user/mypage">マイページへ戻る</a>
+
+        <div class="link">
+            <a href="/user/mypage">マイページへ戻る</a>
+        </div>
+        </div>
     </body>
 </html>

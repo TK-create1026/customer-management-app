@@ -3,17 +3,20 @@
     <head>
         <meta charset="UTF-8">
         <title>登録完了</title>
+        <link rel="stylesheet" th:href="@{/css/style.css}">
     </head>
     <body>
+        <div class="container">
         <h1>登録完了</h1>
-        <p>顧客情報の登録が完了しました</p>
+
+        <p class="welcome">顧客情報の登録が完了しました</p>
         <br><br>
-        <p>
-            <a href="/customer/add">続けて登録する</a>
-        </p>
-        <p>
-            <a href="/customer">ホームに戻る</a>
-        </p>
+
+        <div class="link"><a href="/customer/add">続けて登録する</a></div>
+
+        <div class="link"><a href="/customer">ホームに戻る</a></div>
+            
+        </div>
     </body>
 </html>
 

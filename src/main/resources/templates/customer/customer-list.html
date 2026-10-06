@@ -3,26 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>顧客一覧</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
+    <div class="container-wide">
     <h1>顧客一覧</h1>
 
     <p th:if="${message}"
     th:text="${message}"
-    style="color:red;">
+    class="error">
     </p>
 
-    <style>
-        table{
-            border-collapse: collapse;
-        }
-
-        th,td{
-            padding: 8px;
-        }
-    </style>
-
-    <table border="1">
+    <div class="table-container">
+    <table>
         <tr>
             <th>ID</th>
             <th>名前</th>
@@ -42,12 +35,16 @@
 
             <td>
                 <a th:href="@{/customer/update/{id}(id=${customer.id})}">[更新]</a>
+                <br>
                 <a th:href="@{/customer/password/{id}(id=${customer.id})}">[パスワード変更]</a>
+                <br>
                 <a th:href="@{/customer/delete/{id}(id=${customer.id})}" onclick="return confirm('本当に削除しますか？');">[削除]</a>
             </td>
         </tr>
     </table>
+    </div>
     <br>
-    <a href="/customer">ホームに戻る</a>
+    <div class="link"><a href="/customer">ホームに戻る</a></div>
+    </div>
 </body>
 </html>

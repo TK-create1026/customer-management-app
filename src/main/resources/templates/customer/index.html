@@ -3,14 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>顧客管理システム</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
+    <div class="container">
     <h1>顧客管理システム</h1>
 
-    <p><a href="/customer/add">顧客情報追加</a></p>
+    <div class="link"><a href="/customer/add">顧客情報追加</a></div>
+    
+    <div class="link"><a href="/customer/list">顧客情報一覧</a></div>   
 
-    <p><a href="/customer/list">顧客情報一覧</a></p>
-
-    <p><a href="/customer/search">顧客情報検索</a></p>
+    <div class="link"><a href="/customer/search">顧客情報検索</a></div>
+    
+    </div>
 </body>
 </html>

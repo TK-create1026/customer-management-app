@@ -3,15 +3,24 @@
     <head>
         <meta charset="UTF-8">
         <title>マイページ</title>
+        <link rel="stylesheet" th:href="@{/css/style.css}">
     </head>
     <body>
+        <div class="container">
         <h1>マイページ</h1>
-        <p>ようこそ<span th:text="${customer.name}">さん</span>
+        <p class="welcome">ようこそ<span th:text="${customer.name}"></span>さん
         </p>
+        <div class="link">
         <a href="/user/mypage/lookup">情報照会</a>
+        </div>
         <br>
+        <div class="link">
         <a href="/user/mypage/unsubsc">退会手続き</a>
+        </div>
         <br>
+        <div class="link">
         <a href="/user">ログアウト</a>
+        </div>
+        </div>
     </body>
 </html>

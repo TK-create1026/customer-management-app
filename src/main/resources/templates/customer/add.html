@@ -3,12 +3,14 @@
     <head>
         <meta charset="UTF-8">
         <title>顧客情報追加</title>
+        <link rel="stylesheet" th:href="@{/css/style.css}">
     </head>
     <body>
+        <div class="container">
         <h1>顧客情報追加</h1>
         <p th:if="${message}"
         th:text="${message}"
-        style="color: red;">
+        class="error">
         </p>
         <form th:action="@{/customer/add}" th:object="${customer}" method="post">
             <p>名前</p>
@@ -33,7 +35,9 @@
 
             <br><br>
             <button type="submit">登録</button>
+            <br><br>
             <button type="button" onclick="location.href='/customer'">キャンセル</button>
         </form>
+        </div>
     </body>
 </html>
